@@ -2,17 +2,18 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 $joy-color: #c41230
 
 @import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap'
-@import 'events'
+@import 'eventsview'
+@import 'eventview'
+@import 'addevent'
+
 
 // bower:scss
 @import ../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss
 // endbower
 
-.browsehappy 
-  margin: 0.2em 0
-  background: #ccc
-  color: #000
-  padding: 0.2em 0
+/* reset empty href to make Angular UI Bootstrap work properly */
+.nav, .pagination, .carousel, .panel-title a
+  cursor: pointer
 
 /* Space out content a bit */
 body 
@@ -49,9 +50,10 @@ body
 
 /* Custom nav elements */
 .nav 
-  margin-top: -6px
+  margin-top: -4px
   &.nav-plain-light
     > li 
+      font-size: 0.9em
       float: left
       > a
         color: #d5d5d5
@@ -67,6 +69,11 @@ body
 .progress
   margin: 15px 0 10px 0
   height: 12px
+
+.progress-bar-line
+  background-color: transparent
+  border-right: 2px solid #e00000
+  box-shadow: none
 
 
 

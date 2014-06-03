@@ -1,9 +1,6 @@
-<div class="header">
-  <ul class="nav nav-plain-light pull-right">
-    <li class="active"><a ng-href="#">Home</a></li>
-    <li><a ng-href="#/events">Events</a></li>
-    <li><a ng-href="#">About</a></li>
-    <li><a ng-href="#">Contact</a></li>
+<div class="header" ng-controller="NavCtrl">
+  <ul class="nav nav-plain-light pull-right" ng-repeat="navItem in navItems">
+    <li ng-class="{active: current === navItem}"><a ng-href="#/{{ navItem }}" ng-click="setCurrent(navItem)">{{ navItem | uppercase }}</a></li>
   </ul>
   <h3 class="logo">Joylister</h3>
-</div>
+</div> 

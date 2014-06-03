@@ -6,7 +6,8 @@ angular
     'ngResource',
     'ngSanitize',
     'ngRoute',
-    'firebase'
+    'firebase',
+    'ui.bootstrap'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -15,8 +16,16 @@ angular
         controller: 'MainCtrl'
       })
       .when('/events', {
-        templateUrl: 'views/events.html',
-        controller: 'EventsCtrl'
+        templateUrl: 'views/eventsview.html',
+        controller: 'EventsViewCtrl'
+      })
+      .when('/addevent', {
+        templateUrl: 'views/addevent.html',
+        controller: 'AddeventCtrl'
+      })
+      .when('/events/:eventId', {
+        templateUrl: 'views/eventview.html',
+        controller: 'EventViewCtrl'
       })
       .otherwise({
         redirectTo: '/'

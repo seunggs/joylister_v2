@@ -2,9 +2,13 @@
 
 angular.module('joylisterApp')
   .controller('NavCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+		// Initialize
+		$scope.navItems = ['contact', 'about', 'events', 'home'];
+		$scope.navActive = false;
+
+		// Set current navItem
+		$scope.setCurrent = function(navItem) {
+			$scope.current = navItem;
+		};
+
+	});
