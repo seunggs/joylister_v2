@@ -27,6 +27,14 @@ angular
         templateUrl: 'views/eventview.html',
         controller: 'EventViewCtrl'
       })
+      .when('/signup', {
+        templateUrl: 'views/signup.html',
+        controller: 'SignupCtrl'
+      })
+      .when('/signin', {
+        templateUrl: 'views/signin.html',
+        controller: 'SigninCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

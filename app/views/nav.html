@@ -1,4 +1,10 @@
 <div class="header" ng-controller="NavCtrl">
+	<ul class="nav nav-plain-light pull-right">
+    <!-- Decide whether to show sign-up or sign-in or user's name on nav bar -->
+    <li ng-if="userSignedIn"><a class="logout" ng-click="logout()">Log Out</a></li>
+    <li ng-if="!userSignedIn"><a class="round-btn btn-default btn-sm nav-signup-btn" ng-href="#/signin">Sign In</a></li>
+    <!--<li ng-if="!userSignedIn && !cookiesExist"><a class="round-btn btn-default btn-sm nav-signup-btn" ng-href="#/signup">Sign Up</a></li>-->
+  </ul>
   <ul class="nav nav-plain-light pull-right" ng-repeat="navItem in navItems">
     <li ng-class="{active: current === navItem}"><a ng-href="#/{{ navItem }}" ng-click="setCurrent(navItem)">{{ navItem | uppercase }}</a></li>
   </ul>

@@ -1,26 +1,24 @@
-$icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/"
-$joy-color: #c41230
-
-@import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap'
-@import 'eventsview'
-@import 'eventview'
-@import 'addevent'
-
-
 // bower:scss
 @import ../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss
 // endbower
 
+// custom variables
+$icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/"
+$joy-color: #c41230
+
+// imports
+@import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap'
+@import 'eventsview'
+@import 'eventview'
+@import 'addevent'
+@import 'nav'
+@import 'signup'
+@import 'signin'
+@import 'loginbox'
+
 /* reset empty href to make Angular UI Bootstrap work properly */
 .nav, .pagination, .carousel, .panel-title a
   cursor: pointer
-
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer 
-  padding-left: 15px
-  padding-right: 15px
 
 /* Custom body */
 body 
@@ -36,39 +34,6 @@ body
   margin: 0 auto
   padding: 0
 
-/* Custom page header */
-.header 
-  height: 40px
-  margin: 0
-  border-bottom: 1px solid rgba(0, 0, 0, .1)
-  h3
-    margin-top: 0
-    .logo
-      font-weight: 600
-      letter-spacing: -1px
-      color: $joy-color
-      margin-top: 0
-      margin-bottom: 0
-      &:hover
-        text-decoration: none
-
-/* Custom nav elements */
-.nav 
-  margin-top: -4px
-  &.nav-plain-light
-    > li 
-      font-size: 0.9em
-      float: left
-      > a
-        color: #d5d5d5
-        background-color: transparent
-        &:focus, &:hover 
-          color: #b5b5b5
-          background-color: transparent
-    > li.active 
-      > a 
-        color: #000
-
 /* Custom progress bar */
 .progress
   margin: 15px 0 10px 0
@@ -81,9 +46,14 @@ body
 
 /* Custom button reset */
 .btn-default
+  border-color: #eaeaea
   &:hover
-    background-color: #f7f7f7
+    border-color: #d5d5d5
+    background-color: transparent
 
-
+/* Add custom button style */
+.round-btn
+  @extend .btn
+  border-radius: 20px
 
 
