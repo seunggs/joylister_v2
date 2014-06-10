@@ -1,0 +1,51 @@
+/* Custom page header */
+.header 
+  height: 40px
+  margin: 0
+  border-bottom: 1px solid rgba(0, 0, 0, .1)
+  h3
+    margin-top: 0
+    .logo
+      font-weight: 600
+      letter-spacing: -1px
+      color: $joy-color
+      padding-left: 15px
+      margin-top: 0
+      margin-bottom: 0
+      &:hover
+        text-decoration: none
+
+/* Custom nav elements */
+.nav 
+  margin-top: -4px
+  padding-right: 10px
+  &.nav-plain-light
+    > li 
+      font-size: 0.9em
+      float: left
+      .nav-signup-btn
+        color: #00b6eb
+        padding: 6px 12px
+        margin: 1px 10px 0 15px
+        border-color: #00b6eb
+        &.btn-default:hover,
+        &.btn-default:focus,
+        &.btn-default:active
+          color: #008ebc
+          border-color: #008ebc
+          background-color: transparent
+      .logout
+        color: #00b6eb
+        &:hover, &:focus, &:active
+          color: #008ebc        
+          > li.active 
+            > a 
+              color: #000
+      > a
+        color: #d5d5d5
+        background-color: transparent
+        padding: 10px 10px
+        &:focus, &:hover 
+          color: #b5b5b5
+          background-color: transparent
+

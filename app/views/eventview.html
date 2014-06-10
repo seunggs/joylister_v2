@@ -1,0 +1,63 @@
+<div class="row eventview-header">
+	<div class="col-sm-12 col-md-12 col-lg-12">
+		<h2>{{ event.name }}</h2>
+		<hr>
+		<p class="eventview-vendor">By {{ event.vendor }}</p>
+	</div>
+</div>
+
+<div class="row eventview-feature">
+	<div class="col-sm-8 col-md-8 col-lg-8">
+		<!-- main image -->
+		<img ng-src="{{ images[event.images.1].imageData }}" class="main-image">
+	</div>
+	<div class="col-sm-4 col-md-4 col-lg-4">
+		<!-- small images -->	
+		<img ng-src="{{ images[event.images.0].imageData }}" class="side-image">
+		<img ng-src="{{ images[event.images.2].imageData }}" class="side-image">
+	</div>
+</div>
+
+<div class="row eventview-content">
+	<div class="col-sm-8 col-md-8 col-lg-8">
+		<!-- content goes here -->
+		<h3>{{ event.headline }}</h3>
+		<!-- use ng-bind-html instead of {{ }} because event.desc contains html tags -->
+		<div ng-bind-html="event.desc" class="text"></div> 
+	</div>
+	<div class="col-sm-4 col-md-4 col-lg-4">
+		<!-- booking box -->
+		<div class="booking-box">
+			<h4>Book This Event</h4>
+			<div class="booking-price">${{ event.ticketPrice | number:0 }}<sup>.00</sup></div>
+			<div>per person + HST</div>
+			<div>for 3 hours</div>
+			<a class="btn btn-primary btn-lg btn-block">Book It Now</a>
+			<a class="btn btn-default btn-lg btn-block"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</a>
+		</div>
+
+		<!-- event details -->
+		<div class="detail-box">
+			<h4>Event Details</h4>
+			<table>
+				<tr>
+					<td>Date:</td>
+					<td>{{ event.date | date:'EEE, MMM d, yyyy' }}</td>
+				</tr>
+				<tr>
+					<td>Time:</td>
+					<td>{{ event.time | date:'shortTime' }}</td>
+				</tr>
+				<tr>
+					<td>Area:</td>
+					<td>{{ event.area }}</td>
+				</tr>
+				<tr>
+					<td>Address:</td>
+					<td>{{ event.address }}</td>
+				</tr>
+			</table>
+		</div>
+
+	</div>
+</div>

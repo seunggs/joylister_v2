@@ -1,0 +1,13 @@
+<div class="row login" ng-controller="LoginboxCtrl">
+	<form class="login-form" ng-submit="loginUser()">
+		<input type="email" name="userEmail" class="form-control" placeholder="Email" ng-model="existingUser.email">
+		<input type="password" name="userPassword" class="form-control" placeholder="Password" ng-model="existingUser.password">
+		<input type="submit" value="Sign In" class="btn btn-default login-btn">
+	</form>
+	<!-- success & error message handling -->
+	<alert type="success" ng-if="loginSuccessMsg" class="login-msg">You're logged in successfully! :D</alert>
+	<alert type="danger" ng-if="loginErrorMsg" class="login-msg">User email or password is incorrect.</alert>
+	<!-- Forgot password -->
+	<a ng-click="resetPassword()" class="forgot-password">Forgot your password?</a>
+	<!-- SHOW EMAIL INPUT HERE AND SEND THEM AN EMAIL WITH PASSWORD RESET -->
+</div>

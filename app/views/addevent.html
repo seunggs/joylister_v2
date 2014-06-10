@@ -1,0 +1,257 @@
+<div class="addevent-container">
+	<h3>Add an Event</h3>
+	<div class="event-form-container">
+		<form ng-submit="addEvent(event, thumbsData, imagesData)">
+
+			<!-- form subgroup -->
+			<div class="row">
+				<!-- preview event box on the left -->
+				<div class="col-sm-5 col-md-4 col-lg-3">
+					<div ng-include="'views/eventbox.html'"></div>
+				</div>
+
+				<!-- inputs -->
+				<div class="col-sm-6 col-md-7 col-lg-7 event-input">
+					<!-- container within the row -->
+					<div class="row">
+
+						<div class="row event-form">
+							<div class="col-md-12">
+								<h4>Event Info</h4>
+							</div>
+						</div>
+
+						<div class="row event-form">
+							<div class="col-md-3">
+								<div class="event-form-label">Event name:</div>
+							</div>
+							<div class="col-md-9">
+								<div class="form-group">
+									<input type="text" class="form-control" name="name" ng-model="event.name">
+								</div>
+							</div>
+						</div>
+
+						<div class="row event-form">
+							<div class="col-md-3">
+								<div class="event-form-label">Thumbnail:</div>
+							</div>
+							<div class="col-md-9">
+								<div class="form-group">
+									<input type="file" name="thumb" sc-fileread="thumbsData">
+								</div>
+							</div>
+						</div>
+
+						<div class="row event-form">
+							<div class="col-md-3">
+								<div class="event-form-label">Hosting vendor:</div>
+							</div>
+							<div class="col-md-9">
+								<div class="form-group">
+									<input type="text" class="form-control" name="vendor" ng-model="event.vendor">
+								</div>
+							</div>
+						</div>
+
+						<div class="row event-form">
+							<div class="col-md-3">
+								<div class="event-form-label">Short Blurb:</div>
+							</div>
+							<div class="col-md-9">
+								<div class="form-group">
+									<textarea class="form-control" rows="2" name="summary" ng-model="event.summary"></textarea>
+								</div>
+							</div>
+						</div>
+
+						<div class="row event-form">
+							<div class="col-md-3">
+								<div class="event-form-label">Ticket Price:</div>
+							</div>
+							<div class="col-md-9">
+								<div class="form-group input-group">
+									<span class="input-group-addon">$</span>
+									<input type="text" class="form-control" name="ticketPrice" ng-model="event.ticketPrice">
+								</div>
+							</div>
+						</div>
+
+						<div class="row event-form">
+							<div class="col-md-3">
+								<div class="event-form-label">Minimum Quantity:</div>
+							</div>
+							<div class="col-md-9">
+								<div class="form-group">
+									<input type="number" class="form-control" name="minQuantity" ng-model="event.minQuantity">
+								</div>
+							</div>
+						</div>
+
+						<div class="row event-form">
+							<div class="col-md-3">
+								<div class="event-form-label">Maximum Quantity:</div>
+							</div>
+							<div class="col-md-9">
+								<div class="form-group">
+									<input type="number" class="form-control" name="maxQuantity" ng-model="event.maxQuantity">
+								</div>
+							</div>
+						</div>
+
+						<div class="row event-form">
+							<div class="col-md-3">
+								<div class="event-form-label">Date:</div>
+							</div>
+							<div class="col-md-9">
+								<div class="form-group">
+									<input type="date" class="form-control" name="date" ng-model="event.date">
+								</div>
+							</div>
+						</div>
+
+						<div class="row event-form">
+							<div class="col-md-3">
+								<div class="event-form-label">Area:</div>
+							</div>
+							<div class="col-md-9">
+								<div class="form-group">
+									<input type="text" class="form-control" name="area" ng-model="event.area">
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<!-- form subgroup: event details for eventview page -->
+			<div class="row event-form">
+
+				<!-- left side inputs -->
+				<div class="col-md-6">
+
+					<div class="row event-form">
+						<div class="col-md-12">
+							<h4>Event Details</h4>
+						</div>
+					</div>
+
+					<div class="row event-form">
+						<div class="col-md-3">
+							<div class="event-form-label">Headline:</div>
+						</div>
+						<div class="col-md-9">
+							<div class="form-group">
+								<input type="text" class="form-control" name="headline" ng-model="event.headline">
+							</div>
+						</div>
+					</div>
+
+					<div class="row event-form">
+						<div class="col-md-3">
+							<div class="event-form-label">Description:</div>
+						</div>
+						<div class="col-md-9">
+							<div class="form-group">
+								<textarea class="form-control" rows="12" name="desc" ng-model="event.desc"></textarea>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row event-form">
+						<div class="col-md-3">
+							<div class="event-form-label">Time:</div>
+						</div>
+						<div class="col-md-9">
+							<div class="form-group">
+								<input type="time" class="form-control" name="time" ng-model="event.time">
+							</div>
+						</div>
+					</div>
+
+					<div class="row event-form">
+						<div class="col-md-3">
+							<div class="event-form-label">Address:</div>
+						</div>
+						<div class="col-md-9">
+							<div class="form-group">
+								<input type="text" class="form-control" name="address" ng-model="event.address">
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<!-- right side inputs -->
+				<div class="col-md-6">
+
+					<div class="row event-form">
+						<div class="col-md-12">
+							<h4>More Event Details</h4>
+						</div>
+					</div>
+
+					<div class="row event-form">
+						<div class="col-md-3">
+							<div class="event-form-label">Refund policy:</div>
+						</div>
+						<div class="col-md-9">
+							<div class="form-group">
+								<select class="form-control" name="refundPolicy" ng-model="event.refundPolicy">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<div class="row event-form">
+						<div class="col-md-3">
+							<div class="event-form-label">Fine Prints:</div>
+						</div>
+						<div class="col-md-9">
+							<div class="form-group">
+								<textarea class="form-control" rows="6" name="finePrints" ng-model="event.finePrints"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<div class="row event-form">
+						<div class="col-md-3">
+							<div class="event-form-label">Images:</div>
+						</div>
+						<div class="col-md-9">
+							<div class="form-group">
+								<input type="file" name="images" sc-fileread="imagesData" multiple>
+							</div>
+							<div ng-repeat="image in imagesData">
+								<img ng-src="{{ image }}" class="image-preview">
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<!-- submit button -->
+			<div class="row event-submit">
+				<!-- empty column for left margin -->
+				<div class="col-md-6"></div>
+				<!-- alert: success or failure -->
+				<div class="col-md-4 add-event-alert">
+					<alert type="success" ng-if="addEventSuccessMsg">Event added successfully! :D</alert>
+					<alert type="danger" ng-if="addEventFailMsg">Event addition failed. :(</alert>
+					<alert type="warning" ng-if="loadingMsg">Please wait...</alert>
+				</div>
+				<!-- submit button -->
+				<div class="col-md-2 add-event-submit">
+					<input type="submit" class="btn btn-primary btn-lg" name="submitEvent" value="Add Event">
+				</div>
+			</div>
+
+		</form>
+	</div>
+</div>

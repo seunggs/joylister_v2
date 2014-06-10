@@ -1,0 +1,71 @@
+.eventview-header
+	padding: 30px
+	hr
+		width: 60px
+		border-top: 1px solid #000
+		margin: 15px auto
+	h2
+		font-size: 2.5em
+		color: #000
+		text-align: center
+		margin: 0
+	.eventview-vendor
+		font-size: 1.2em
+		color: #d3d3d3
+		text-align: center
+		margin: 0
+
+.eventview-feature
+	max-height: 500px
+	.main-image
+		width: 100%
+	.side-image
+		width: 100%
+		&:first-child
+			margin-bottom: 20px
+
+.eventview-content
+	margin: 35px 0
+	h3
+		margin: 15px 0
+		font-size: 2em
+		color: #000
+	.text
+		font-size: 1.15em
+		line-height: 1.6em
+		color: #666
+	%side-box
+		text-align: center
+		border: 1px solid $outline-color
+		padding: 20px
+		.glyphicon
+			font-size: 0.9em
+			color: $joy-color
+		h4
+			text-transform: uppercase
+			font-size: 1.5em
+			color: #999
+		.booking-price
+			font-size: 2.7em
+			font-weight: 600
+		sup
+			font-size: 0.6em
+		.btn
+			width: 90%
+			margin: 20px auto 15px auto
+			&:last-child
+				margin-top: 12px
+	.booking-box
+		@extend %side-box
+	.detail-box
+		@extend %side-box
+		margin-top: 25px
+		font-size: 1.1em
+		table
+			width: 90%
+			margin: 15px auto 0 auto
+			td
+				text-align: left
+				padding: 5px
+				&:first-child
+					color: #999
