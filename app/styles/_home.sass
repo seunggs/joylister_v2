@@ -1,0 +1,39 @@
+$feature-height: 100vh
+
+.home
+	background-color: #f9f7f8
+	background-position: center bottom
+	+background(image-url("home_bg_2.png"))
+	+background-size(cover)
+	height: $feature-height
+	margin-top: -53px
+	margin-bottom: -13px
+
+.feature-text
+	margin-top: 50%
+	h3
+		font-size: 2em
+		line-height: 1.2em
+		font-weight: 500
+		color: #000
+	hr
+		margin: 15px 0 15px 0
+		width: 80px
+		border-color: #000
+	p
+		font-size: 1.2em
+		line-height: 1.4em
+		color: #888
+	.btn-md
+		margin: 5px 8px 0 0
+		font-size: 1.1em
+		font-weight: 300
+		padding: 10px 14px
+
+	.btn-default
+		color: #999
+		border-color: #999
+		background: transparent
+		&:focus, &:hover
+			color: #000
+			border-color: #000

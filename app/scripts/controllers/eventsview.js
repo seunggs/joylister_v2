@@ -7,5 +7,4 @@ angular.module('joylisterApp')
 
 		// Retrieve the thumb
 		$scope.thumbs = Thumb.all;
-
   });

@@ -1,6 +1,6 @@
 /* Custom page header */
 .header 
-  height: 40px
+  height: 39px
   margin: 0
   border-bottom: 1px solid rgba(0, 0, 0, .1)
   h3
@@ -17,16 +17,16 @@
 
 /* Custom nav elements */
 .nav 
-  margin-top: -4px
+  margin-top: -5px
   padding-right: 10px
   &.nav-plain-light
-    > li 
+    li 
       font-size: 0.9em
       float: left
-      .nav-signup-btn
+      .nav-register-btn
         color: #00b6eb
-        padding: 6px 12px
-        margin: 1px 10px 0 15px
+        padding: 4px 10px
+        margin: 3px 0 0 15px
         border-color: #00b6eb
         &.btn-default:hover,
         &.btn-default:focus,
@@ -34,13 +34,31 @@
           color: #008ebc
           border-color: #008ebc
           background-color: transparent
-      .logout
+      .nav-signin-btn
+        @extend .nav-register-btn
+        color: #ccc
+        border-color: #ccc
+        margin-right: 10px
+        &.btn-default:hover,
+        &.btn-default:focus,
+        &.btn-default:active
+          color: #aaa
+          border-color: #aaa
+      .v-divider
+        height: 100%
+        border-right: 1px solid $outline-color
+        padding: 4px 0 4px 10px
+        margin: 5px 0 0 0
+      .my-account
         color: #00b6eb
+        padding-right: 0
         &:hover, &:focus, &:active
           color: #008ebc        
-          > li.active 
-            > a 
-              color: #000
+      .logout
+        color: #00b6eb
+        padding-left: 13px
+        &:hover, &:focus, &:active
+          color: #008ebc        
       > a
         color: #d5d5d5
         background-color: transparent
@@ -48,4 +66,18 @@
         &:focus, &:hover 
           color: #b5b5b5
           background-color: transparent
+        &.active
+          color: #000
+  &.nav-plain-home
+    @extend .nav-plain-light
+    li
+      > a
+        color: #bbb
+        &:focus, &:hover 
+          color: #999
+
+/* Add custom button style */
+.round-btn
+  @extend .btn
+  border-radius: 20px
 

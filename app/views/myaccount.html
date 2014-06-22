@@ -1,0 +1,106 @@
+<div class="container">
+	<div class="row myaccount">
+		<div class="col-md-12">
+			<div class="row myprofile">
+
+				<table>
+					<tr>
+						<td>
+							<div class="avatar"></div>
+						</td>
+						<td>
+							<div class="myinfo">
+								
+								<div class="name" ng-if="!editProfile.showNameEdit">
+									<h3>{{ user.firstname }} {{ user.lastname }}</h3>
+									<div class="edit" ng-click="editProfile.showNameEdit = true">Edit</div>
+								</div>
+								<!-- only show when edit is clicked -->
+								<div class="nameEdit" ng-if="editProfile.showNameEdit">
+									<form ng-submit="submitNameEdit()">
+										<div class="form-group">
+											<input class="form-control form-edit" type="text" placeholder="First name" ng-model="editProfile.firstName" required>
+											<input class="form-control form-edit" type="text" placeholder="Last name" ng-model="editProfile.lastName" required>
+											<button class="btn btn-warning btn-edit" type="submit">Submit</button>
+											<button class="btn btn-danger btn-edit" ng-click="editProfile.showNameEdit = false">Cancel</button>
+										</div>
+									</form>
+								</div>
+								
+								<div class="email" ng-if="!editProfile.showEmailEdit">
+									<div class="text">{{ user.email }}</div>
+									<div class="edit" ng-click="editProfile.showEmailEdit = true">Edit</div>
+								</div>
+								<!-- only show when edit is clicked -->
+								<div class="emailEdit" ng-if="editProfile.showEmailEdit">
+									<form ng-submit="submitEmailEdit()">
+										<div class="form-group">
+											<input class="form-control form-edit-email" type="email" placeholder="Email" ng-model="editProfile.email" required>
+											<button type="submit" class="btn btn-warning btn-edit">Submit</button>
+											<button class="btn btn-danger btn-edit" ng-click="editProfile.showEmailEdit = false">Cancel</button>
+										</div>
+									</form>
+								</div>
+
+								<div>
+									<a class="btn btn-default btn-reset-password" ng-href="#/changepassword">Change Password</a>
+								</div>
+
+							</div>
+						</td>
+					</tr>
+				</table>
+
+			</div>				
+		</div>
+
+		<div class="col-md-4">
+		</div>
+	</div>
+
+	<div class="row wishlist">
+		<div class="heading">
+			<span class="glyphicon glyphicon-heart"></span><h3>My Wishlist</h3>
+		</div>
+
+		<div class="col-sm-5 col-md-4 col-lg-3" ng-repeat="(wishlistItemId, wishlistItem) in wishlist">
+			<a class="wishlist-item-wrapper" ng-href="#/events/{{ wishlistItemId }}">
+
+				<div class="wishlist-item-pic">
+					<div class="remove-wishlist-item" ng-click="removeWishlistItem(wishlistItemId)" tooltip="Remove from Wishlist" tooltip-placement="top"><span class="glyphicon glyphicon-remove"></span></div>
+					<img ng-src="{{ thumbs[events[wishlistItemId].thumbs.0].thumbData }}" class="thumb">
+					<div class="price">${{ events[wishlistItemId].ticketPrice }}</div>
+				</div>
+
+				<div class="wishlist-item-content">
+
+					<div><h3>{{ events[wishlistItemId].name }}</h3></div>
+					<div class="vendor-text">By {{ events[wishlistItemId].vendor }}</div>
+
+					<div class="wishlist-item-details">
+						<table>
+							<tr>
+								<td>Date:</td>
+								<td>{{ events[wishlistItemId].date | date: 'MMM d, y (EEE)' }}</td>
+							</tr>
+							<tr>
+								<td>Place:</td>
+								<td>{{ events[wishlistItemId].area }}</td>
+							</tr>
+						</table>
+					</div>
+
+				</div>
+
+			</a>
+		</div>
+	</div>
+
+	<div class="row attended-events">
+		<div class="heading">
+			<span class="glyphicon glyphicon-ok"></span><h3>Attended Events</h3>
+		</div>
+	</div>
+
+</div>
+

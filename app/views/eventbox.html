@@ -3,6 +3,7 @@
 		<img ng-src="{{ thumbs[event.thumbs.0].thumbData }}" ng-if="!eventboxAsPreview()"> 
 		<!-- if eventbox is being viewed as a preview, show the image in real-time -->
 		<img ng-src="{{ thumbsData[0] }}" ng-if="eventboxAsPreview()">
+		<div class="price">${{ event.ticketPrice }}</div>
 	</div>
 	<div class="event-box">
 		<div class="event-text">

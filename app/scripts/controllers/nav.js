@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('joylisterApp')
-  .controller('NavCtrl', function ($scope, Auth) {
+  .controller('NavCtrl', function ($scope, Auth, $location) {
 		// Initialize
 		$scope.navItems = ['contact', 'about', 'events', 'home'];
-		$scope.navActive = false;
+		$scope.navItemLinks = ['contact', 'about', 'events', 'home']; // match the link names with navItem array above
+		$scope.navItemTexts = ['Contact', 'About', 'Events', 'Home']; // match the texts with navItem array above
 
 		// Set current navItem (this is to make selected nav item active)
 		$scope.setCurrent = function(navItem) {
@@ -15,7 +16,6 @@ angular.module('joylisterApp')
 		$scope.user = Auth.user;
 
 		// userSignedIn variable initialization
-		console.log('Auth.signedIn() in nav.js: ' + Auth.signedIn());
 		$scope.userSignedIn = Auth.signedIn();
 		
 		// Cookies variable initialization
@@ -24,10 +24,7 @@ angular.module('joylisterApp')
 		// Handle logout
 		$scope.logout = function() {
 			Auth.logout();
-			console.log('Auth.signedIn() after logout(): ' + Auth.signedIn());
-			$scope.$on('firebaseSimpleLogin:logout', function() {
-				console.log('Auth.signedIn() after logout(): ' + Auth.signedIn());
-			});
+			$location.path('/');
 		};
 
 	});

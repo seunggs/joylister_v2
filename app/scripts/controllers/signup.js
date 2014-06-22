@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('joylisterApp')
-  .controller('SignupCtrl', function ($scope, Auth, Cookies, $location, $timeout) {
+  .controller('SignupCtrl', function ($scope, Auth, Cookies, User, $location, $timeout) {
 
 		// Initialize variables
 		$scope.user = {};
@@ -25,7 +25,14 @@ angular.module('joylisterApp')
 				Auth.register($scope.user)
 					.then(function(user) {
 						// Log the user in
-						Auth.login($scope.user);
+						Auth.login($scope.user)
+							.then(function() {
+								// Add other user data to /users in Firebase
+								// this is within the login success callback to make sure uid is not null
+								$scope.userData.email = $scope.user.email;
+								$scope.userData.wishlist = '';
+								User.create($scope.userData);
+							});
 
 						// success callback
 						registerSuccess = true;

@@ -1,7 +1,12 @@
 {
   "name": "joylister",
   "version": "0.0.0",
-  "dependencies": {},
+  "main": "server.js",
+  "dependencies": {
+    "express": "~4.4.3",
+    "body-parser": "~1.0.0",
+    "morgan": "~1.0.0"
+    },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-autoprefixer": "~0.4.0",

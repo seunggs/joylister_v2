@@ -8,6 +8,7 @@ $joy-color: #c41230
 
 // imports
 @import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap'
+@import 'compass/css3'
 @import 'eventsview'
 @import 'eventview'
 @import 'addevent'
@@ -15,6 +16,10 @@ $joy-color: #c41230
 @import 'signup'
 @import 'signin'
 @import 'loginbox'
+@import 'home'
+@import 'myaccount'
+@import 'resetpassword'
+@import 'changepassword'
 
 /* reset empty href to make Angular UI Bootstrap work properly */
 .nav, .pagination, .carousel, .panel-title a
@@ -42,18 +47,4 @@ body
 .progress-bar-line
   background-color: transparent
   border-right: 2px solid #e00000
-  box-shadow: none
-
-/* Custom button reset */
-.btn-default
-  border-color: #eaeaea
-  &:hover
-    border-color: #d5d5d5
-    background-color: transparent
-
-/* Add custom button style */
-.round-btn
-  @extend .btn
-  border-radius: 20px
-
-
+  box-shadow: none  

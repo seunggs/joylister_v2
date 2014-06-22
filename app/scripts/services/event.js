@@ -22,6 +22,7 @@ angular.module('joylisterApp')
 		var descWithoutTags;
 		var descRegex;
 		var descWithoutTagsArray = [];
+		var descWithTags;
 
 		var Event = {
 			all: events,
@@ -58,7 +59,6 @@ angular.module('joylisterApp')
 
 									// Add imageId to events
 									imageIdArray.push(imageId);
-									console.log(imageIdArray);
 									eventRef.child('images').update(imageIdArray);
 								});
 						}
@@ -67,12 +67,10 @@ angular.module('joylisterApp')
 						descWithoutTags = event.desc + '\n'; // add \n at the end so regex will catch the last paragraph
 						descRegex = /(.+)\s*\n+/g;
 						descWithoutTagsArray = descWithoutTags.match(descRegex);
-						console.log(descWithoutTagsArray);
 						for (var k = 0; k < descWithoutTagsArray.length; k++) {
 							descWithoutTagsArray[k] = descWithoutTagsArray[k].replace(descRegex, '$1');
 						}
-						var descWithTags = '<p>' + descWithoutTagsArray.join('</p><p>') + '</p>';
-						console.log(descWithTags);
+						descWithTags = '<p>' + descWithoutTagsArray.join('</p><p>') + '</p>';
 
 					});
 

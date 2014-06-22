@@ -12,8 +12,8 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/home.html',
+        controller: 'HomeCtrl'
       })
       .when('/events', {
         templateUrl: 'views/eventsview.html',
@@ -34,6 +34,18 @@ angular
       .when('/signin', {
         templateUrl: 'views/signin.html',
         controller: 'SigninCtrl'
+      })
+      .when('/myaccount/:userId', {
+        templateUrl: 'views/myaccount.html',
+        controller: 'MyaccountCtrl'
+      })
+      .when('/resetpassword', {
+        templateUrl: 'views/resetpassword.html',
+        controller: 'ResetpasswordCtrl'
+      })
+      .when('/changepassword', {
+        templateUrl: 'views/changepassword.html',
+        controller: 'ChangepasswordCtrl'
       })
       .otherwise({
         redirectTo: '/'
