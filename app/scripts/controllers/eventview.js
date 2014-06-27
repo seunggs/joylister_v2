@@ -14,7 +14,7 @@ angular.module('joylisterApp')
     $httpProvider.defaults.headers.patch = {};
     */
 	})
-  .controller('EventViewCtrl', function ($scope, $routeParams, Event, Image, $location, Auth, $firebase, FIREBASE_URL, $timeout, $http) {
+  .controller('EventViewCtrl', function ($scope, $routeParams, Event, Image, $location, Auth, $firebase, FIREBASE_URL, $timeout, $http, Stripe) {
 		// Fine the specific event for this page
 		$scope.event = Event.find($routeParams.eventId);
 
@@ -38,60 +38,11 @@ angular.module('joylisterApp')
 			$scope.formData.buyQuantity = $scope.buyQuantityList[0]; // setting options default
 		});
 
-		// Define handler for when Stripe returns a token
-		var onReceiveToken = function(token) {
-			$http({
-				url: '/charge',
-				method: 'POST',
-				data: {
-					stripeToken: token.id
-				}
-			})
-			.success(function(data) {
-				console.log(data);
-			})
-			.error(function() {
-				console.log('error');
-			});
-		};
-
-		// Post more data to be used on the backend
-		/*
-		$http({
-			url: '/charge',
-			type: 'POST',
-			data: {
-				amount: $scope.event.ticketPrice * 100 * $scope.buyQuantity,
-				description: $scope.event.name
-			}
-		});
-		*/
-
 		// Configure Stripe Checkout
-
-		var stripeCheckout = function() {
-			var handler = StripeCheckout.configure({
-				key: 'pk_test_iTfgLvUHP4hUc9IDg9QAlD5o',
-				image: '/images/stripe_logo.jpg',
-				token: onReceiveToken,
-				name: $scope.event.name,
-				description: $scope.formData.buyQuantity + ' ticket(s)',
-				amount: $scope.event.ticketPrice * 100 * $scope.formData.buyQuantity
-			});
-	
-			// Open Checkout when the buy button is clicked
-			$scope.openCheckout = function() {
-				handler.open();
-			};
+		$scope.openCheckout = function() {
+			Stripe.buyTickets($scope.formData);
 		};
 
-		events.$on('loaded', function() {
-			stripeCheckout(); // have Stripe wait until event info from Firebase loads
-		});
-
-		$scope.$watch('formData.buyQuantity', function() {
-			stripeCheckout();
-		});
 
 		// Wishlist -------------------------
 		// Initialize variables

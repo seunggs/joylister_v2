@@ -1,10 +1,10 @@
+'use strict';
+
+var stripe = require('stripe')('sk_test_BiXbus56OIaKgkp3B7ftheQp'); // update it with real one on production
+
 module.exports = function(app) {
 	// stripe charge
 	app.post('/charge', function(req, res) {
-			// CORS
-			//res.header('Access-Control-Allow-Origin', '*');
-			//res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
-
 			var stripeToken = req.body.stripeToken;
 			console.log('stripeToken');
 
@@ -33,5 +33,5 @@ module.exports = function(app) {
 	// application
 	app.get('*', function(req, res) {
 		res.sendfile('../app/index.html'); // have Angular handle all front-end routing
-	});	
-}
+	});
+};
