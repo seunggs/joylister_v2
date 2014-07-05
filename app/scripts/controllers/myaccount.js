@@ -38,10 +38,11 @@ angular.module('joylisterApp')
 		// Remove wishlist item
 		$scope.removeWishlistItem = function(wishlistItemId, e) {
 			Wishlist.delete($routeParams.userId, wishlistItemId);
-			e.preventDefault(); // prevent ng-href from executing
-			
+			e.preventDefault(); // prevent ng-href from executing and relocating to eventview of deleted wishlist item
 		};
 
 		// Display purchased items
 		$scope.purchases = User.findPurchases($routeParams.userId); // list of user's purchases
+		
+		
   });

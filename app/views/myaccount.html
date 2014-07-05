@@ -85,7 +85,7 @@
 						<table>
 							<tr>
 								<td>Date:</td>
-								<td>{{ events[wishlistItemId].date | date: 'MMM d, y (EEE)' }}</td>
+								<td>{{ events[wishlistItemId].closestDate | date: 'MMM d, y (EEE)' }}</td>
 							</tr>
 							<tr>
 								<td>Place:</td>
@@ -106,7 +106,7 @@
 		</div>
 
 		<div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="(purchaseId, purchase) in purchases">
-			<a class="wishlist-item-wrapper" ng-href="#/events/{{ wishlistItemId }}">
+			<div class="wishlist-item-wrapper">
 
 				<div class="wishlist-item-pic">
 					<img ng-src="{{ events[purchaseId].thumbUrl }}" class="thumb">
@@ -121,23 +121,15 @@
 					<div class="wishlist-item-details">
 						<table>
 							<tr>
-								<td>Date:</td>
-								<td>{{ events[purchaseId].date | date: 'MMM d, y (EEE)' }}</td>
-							</tr>
-							<tr>
 								<td>Place:</td>
 								<td>{{ events[purchaseId].area }}</td>
-							</tr>
-							<tr>
-								<td>You bought:</td>
-								<td>{{ something }} tickets</td>
 							</tr>
 						</table>
 					</div>
 
 				</div>
 
-			</a>
+			</div>
 		</div>
 
 	</div>
