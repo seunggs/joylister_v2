@@ -29,7 +29,6 @@ $feature-height: 100vh
 		font-size: 1.1em
 		font-weight: 300
 		padding: 10px 14px
-
 	.btn-default
 		color: #999
 		border-color: #999
@@ -37,3 +36,16 @@ $feature-height: 100vh
 		&:focus, &:hover
 			color: #000
 			border-color: #000
+
+@media(max-width:767px)
+	.home
+		+background(image-url("home_bg_mobile.png"))
+		+background-size(767px)
+		background-color: #f9f7f8
+		background-position: bottom
+		background-repeat: no-repeat
+	.feature-text
+		margin-top: 120px
+		text-align: center
+		hr
+			margin: 15px auto

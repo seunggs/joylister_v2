@@ -48,6 +48,14 @@ angular
         templateUrl: 'views/changepassword.html',
         controller: 'ChangepasswordCtrl'
       })
+      .when('/aboutus', {
+        templateUrl: 'views/aboutus.html',
+        controller: 'AboutusCtrl'
+      })
+      .when('/contactus', {
+        templateUrl: 'views/contactus.html',
+        controller: 'ContactusCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
