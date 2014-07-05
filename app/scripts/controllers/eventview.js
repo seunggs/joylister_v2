@@ -139,7 +139,7 @@ angular.module('joylisterApp')
 						});
 
 						for (var j=datePurchased.purchaseQty; j<(datePurchased.purchaseQty+$scope.formData.buyQuantity); j++) {
-							datePurchased.$child('ticketCodes').$child(j-$scope.formData.buyQuantity+1).$set(generatedTicketCodes[j-datePurchased.purchaseQty]);
+							datePurchased.$child('ticketCodes').$add(generatedTicketCodes[j-datePurchased.purchaseQty]);
 						}
 					}
 
