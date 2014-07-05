@@ -4,6 +4,7 @@
 var stripe = require('stripe')('sk_test_BiXbus56OIaKgkp3B7ftheQp'); // update it with real one on production
 var crypto = require('crypto'); // for AWS S3
 var config = require('../config.js'); // for AWS S3 credentials
+var moment = require('moment');
 var AWS_BUCKET = 'joylister-media';
 
 module.exports = function(app) {
@@ -30,10 +31,12 @@ module.exports = function(app) {
 
 	});
 
+	//2014-12-01T12:00:00.000Z
+
 	// AWS S3 credentials
 	app.get('/s3credentials', function(req, res) {
 		var s3Policy = {
-			'expiration': '2014-12-01T12:00:00.000Z',
+			'expiration': moment().add('hours', 1).toISOString(),
 			'conditions': [
 				['starts-with', '$key', ''],
 				{'bucket': AWS_BUCKET},
