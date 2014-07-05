@@ -1,23 +1,33 @@
 'use strict';
 
 angular.module('joylisterApp')
-  .controller('MyaccountCtrl', function ($scope, User, Event, Thumb, $routeParams) {
+  .controller('MyaccountCtrl', function ($scope, User, Event, $routeParams) {
 		// Expose user data to scope
 		$scope.user = User.find($routeParams.userId);
 
-		// Edit profile - must create an object due to prototypical inheritance
+		// Edit profile - must create an object due to prototypal inheritance
 		$scope.editProfile = {
 			showNameEdit: false,
 			showEmailEdit: false
 		};
 
 		$scope.submitNameEdit = function() {
-			User.update($routeParams.userId, 'firstname', $scope.editProfile.firstName);
-			User.update($routeParams.userId, 'lastname', $scope.editProfile.lastName);
+			User.update($routeParams.userId, { firstname: $scope.editProfile.firstName, lastname: $scope.editProfile.lastName })
+				.then(function() {
+					$scope.editProfile.showNameEdit = false;
+				});
 		};
 
 		$scope.submitEmailEdit = function() {
-			User.update($routeParams.userId, 'email', $scope.editProfile.email);
+			User.update($routeParams.userId, { email: $scope.editProfile.email })
+				.then(function() {
+					$scope.editProfile.showEmailEdit = false;
+				});
+		};
+
+		// Add avatar image to Firebase
+		$scope.addAvatarToFirebase = function() {
+			User.update($routeParams.userId, { avatarUrl: $scope.avatarUrl });
 		};
 
 		// Display wishlist items		
@@ -25,10 +35,11 @@ angular.module('joylisterApp')
 
 		$scope.events = Event.all;
 
-		$scope.thumbs = Thumb.all;
-
 		// Remove wishlist item
 		$scope.removeWishlistItem = function(wishlistItemId) {
 			User.deleteWishlistItem($routeParams.userId, wishlistItemId);
 		};
+
+		// Display purchased items
+		$scope.purchases = User.findPurchases($routeParams.userId); // list of user's purchases
   });

@@ -1,8 +1,6 @@
 <a class="event-wrapper" ng-href="#/events/{{ eventId }}">
 	<div class="event-thumb-container">
-		<img ng-src="{{ thumbs[event.thumbs.0].thumbData }}" ng-if="!eventboxAsPreview()"> 
-		<!-- if eventbox is being viewed as a preview, show the image in real-time -->
-		<img ng-src="{{ thumbsData[0] }}" ng-if="eventboxAsPreview()">
+		<img ng-src="{{ event.thumbUrl }}" ng-if="!eventboxAsPreview()"> 
 		<div class="price">${{ event.ticketPrice }}</div>
 	</div>
 	<div class="event-box">
@@ -19,7 +17,7 @@
 				</tr>
 				<tr>
 					<td>Date:</td>
-					<td>{{ event.date | date: 'MMM d, y (EEE)' }}</td>
+					<td>{{ event.closestDate | date: 'MMM d, y (EEE)' }}</td>
 				</tr>
 				<tr>
 					<td>Place:</td>
@@ -29,12 +27,15 @@
 		</div>
 
 		<progress>
-			<bar class="progress-bar-success" value="event.currentQuantity/event.maxQuantity*100"></bar>
-			<bar class="progress-bar-line" value="(event.minQuantity - event.currentQuantity)/event.maxQuantity*100" ng-if="event.currentQuantity < event.minQuantity"></bar>
+			<bar ng-if="event.closestDateCurrentQty !== event.maxQuantity" class="progress-bar-success" value="event.closestDateCurrentQty/event.maxQuantity*100"></bar>
+			<bar ng-if="event.closestDateCurrentQty === event.maxQuantity" class="progress-bar-danger" value="event.closestDateCurrentQty/event.maxQuantity*100"></bar>
+			<bar class="progress-bar-line" value="(event.minQuantity - event.closestDateCurrentQty)/event.maxQuantity*100" ng-if="event.closestDateCurrentQty < event.minQuantity"></bar>
 		</progress>
 
 		<div class="tipping-point-msg">
-			<div ng-if="event.currentQuantity < event.minQuantity">{{ event.minQuantity - event.currentQuantity }} more tickets to activate this event</div>
+			<div ng-if="event.closestDateCurrentQty < event.minQuantity">{{ event.minQuantity - event.closestDateCurrentQty }} more ticket(s) to activate this event</div>
+			<div ng-if="event.closestDateCurrentQty >= event.minQuantity && event.closestDateCurrentQty !== event.maxQuantity">This event is activated!</div>			
+			<div ng-if="event.closestDateCurrentQty === event.maxQuantity">SOLD OUT!</div>
 		</div>
 	</div>
 </a>

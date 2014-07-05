@@ -7,6 +7,7 @@ angular.module('joylisterApp')
 		$scope.user = {};
 		$scope.formErrorMsg = {};
 		var registerSuccess = false; // indicates successful registration 
+		$scope.user.avatarUrl = '/images/defaultAvatar.jpg';
 		
 		// Check to see if password is same as confirm password
 		$scope.confirmPassword = function() {

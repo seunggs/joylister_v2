@@ -10,12 +10,12 @@
 	<div class="row eventview-feature">
 		<div class="col-sm-8 col-md-8 col-lg-8">
 			<!-- main image -->
-			<img ng-src="{{ images[event.images.1].imageData }}" class="main-image">
+			<img ng-src="{{ event.images.featureImageUrl1 }}" class="main-image">
 		</div>
 		<div class="col-sm-4 col-md-4 col-lg-4">
 			<!-- small images -->	
-			<img ng-src="{{ images[event.images.0].imageData }}" class="side-image">
-			<img ng-src="{{ images[event.images.2].imageData }}" class="side-image">
+			<img ng-src="{{ event.images.sideImageUrl1 }}" class="side-image">
+			<img ng-src="{{ event.images.sideImageUrl2 }}" class="side-image">
 		</div>
 	</div>
 
@@ -32,18 +32,22 @@
 				<h4>Book This Event</h4>
 				<div class="booking-price">${{ event.ticketPrice | number:0 }}</div>
 				<div>per person + HST</div>
-				<div>for 3 hours</div>
-				<form class="form-inline">
+				<form class="form-inline" ng-if="!soldout">
 					<div class="form-group">
 						<table>
 							<tr>
-								<td>Ticket Quantity:</td>
+								<td>Date:</td>
+								<td><select class="form-control" ng-model="formData.date" ng-options="num for num in datesList"></select></td>
+							</tr>
+							<tr>
+								<td>Qty:</td>
 								<td><select class="form-control" ng-model="formData.buyQuantity" ng-options="num for num in buyQuantityList"></select></td>
 							</tr>
 						</table>
 					</div>
 				</form>
-				<a class="btn btn-primary btn-lg btn-block" ng-click="openCheckout()">Book It Now</a>
+				<a class="btn btn-primary btn-lg btn-block" ng-click="openCheckout()" ng-if="!soldout">Book It Now</a>
+				<button disabled class="btn btn-danger btn-lg btn-block" ng-click="openCheckout()" ng-if="soldout">Sold Out!</button>
 				<a ng-if="!eventAlreadyExists" class="btn btn-default btn-lg btn-block" ng-click="addToWishlist()"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</a>
 				<a ng-if="eventAlreadyExists" class="btn btn-default btn-lg btn-block disabled"><span class="glyphicon glyphicon-heart"></span> Added to Wishlist</a>
 
@@ -58,11 +62,11 @@
 				<table>
 					<tr>
 						<td>Date:</td>
-						<td>{{ event.date | date:'EEE, MMM d, yyyy' }}</td>
+						<td>{{ formData.date | date:'EEE, MMM d, yyyy' }}</td>
 					</tr>
 					<tr>
 						<td>Time:</td>
-						<td>{{ event.time | date:'shortTime' }}</td>
+						<td>{{ eventTime }}</td>
 					</tr>
 					<tr>
 						<td>Area:</td>

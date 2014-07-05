@@ -39,7 +39,7 @@
 								</div>
 								<div class="col-md-9">
 									<div class="form-group">
-										<input type="file" name="thumb" sc-fileread="thumbsData">
+										<div s3-upload bucket="joylister-media" btn-text="Upload Thumbnail" ng-model="event.thumbUrl" s3-upload-options="{getOptionsUri: 'http://localhost:8000/s3credentials', folder: 'thumbs/'}"></div>
 									</div>
 								</div>
 							</div>
@@ -114,12 +114,24 @@
 
 							<div class="row event-form">
 								<div class="col-md-3">
-									<div class="event-form-label">Date:</div>
+									<div class="event-form-label">Dates:</div>
 								</div>
 								<div class="col-md-9">
-									<div class="form-group">
-										<input type="date" class="form-control" name="date" ng-model="event.date">
+									<div class="row" ng-repeat="item in items">
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="date" class="form-control" name="date" ng-model="eventDates[item]">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="time" class="form-control" name="date" ng-model="eventTimes[item]">
+											</div>
+										</div>
 									</div>
+	
+									<button type="button" class="btn btn-default btn-md btn-event-date" ng-click="addEventDate();">Add a date</button>
+									<button type="button" class="btn btn-default btn-md btn-event-date" ng-click="deleteEventDate();">Delete a date</button>
 								</div>
 							</div>
 
@@ -171,17 +183,6 @@
 								</div>
 							</div>
 						</div>
-						
-						<div class="row event-form">
-							<div class="col-md-3">
-								<div class="event-form-label">Time:</div>
-							</div>
-							<div class="col-md-9">
-								<div class="form-group">
-									<input type="time" class="form-control" name="time" ng-model="event.time">
-								</div>
-							</div>
-						</div>
 
 						<div class="row event-form">
 							<div class="col-md-3">
@@ -201,49 +202,52 @@
 
 						<div class="row event-form">
 							<div class="col-md-12">
-								<h4>More Event Details</h4>
+								<h4>Event Images</h4>
 							</div>
 						</div>
 
 						<div class="row event-form">
 							<div class="col-md-3">
-								<div class="event-form-label">Refund policy:</div>
+								<div class="event-form-label">Big Img:</div>
 							</div>
 							<div class="col-md-9">
-								<div class="form-group">
-									<select class="form-control" name="refundPolicy" ng-model="event.refundPolicy">
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-									</select>
-								</div>
+								<div s3-upload bucket="joylister-media" btn-text="Upload Image" ng-model="event.images.featureImageUrl1" s3-upload-options="{getOptionsUri: 'http://localhost:8000/s3credentials', folder: 'images/'}"></div>
 							</div>
 						</div>
 
 						<div class="row event-form">
 							<div class="col-md-3">
-								<div class="event-form-label">Fine Prints:</div>
+								<div class="event-form-label">Side Img1:</div>
 							</div>
 							<div class="col-md-9">
-								<div class="form-group">
-									<textarea class="form-control" rows="6" name="finePrints" ng-model="event.finePrints"></textarea>
-								</div>
+								<div s3-upload bucket="joylister-media" btn-text="Upload Image" ng-model="event.images.sideImageUrl1" s3-upload-options="{getOptionsUri: 'http://localhost:8000/s3credentials', folder: 'images/'}"></div>
 							</div>
 						</div>
 
 						<div class="row event-form">
 							<div class="col-md-3">
-								<div class="event-form-label">Images:</div>
+								<div class="event-form-label">Side Img2:</div>
 							</div>
 							<div class="col-md-9">
-								<div class="form-group">
-									<input type="file" name="images" sc-fileread="imagesData" multiple>
-								</div>
-								<div ng-repeat="image in imagesData">
-									<img ng-src="{{ image }}" class="image-preview">
-								</div>
+								<div s3-upload bucket="joylister-media" btn-text="Upload Image" ng-model="event.images.sideImageUrl2" s3-upload-options="{getOptionsUri: 'http://localhost:8000/s3credentials', folder: 'images/'}"></div>
 							</div>
 						</div>
+
+						<!-- image preview -->
+						<div class="row event-form">
+							<div class="col-md-12">
+								<img class="image-preview" ng-if="event.images.featureImageUrl1" ng-src="{{ event.images.featureImageUrl1 }}">
+							</div>
+						</div>
+						<div class="row event-form">
+							<div class="col-md-6">
+								<img class="image-preview" ng-if="event.images.sideImageUrl1" ng-src="{{ event.images.sideImageUrl1 }}">
+							</div>
+							<div class="col-md-6">
+								<img class="image-preview" ng-if="event.images.sideImageUrl2" ng-src="{{ event.images.sideImageUrl2 }}">
+							</div>
+						</div>
+
 
 					</div>
 

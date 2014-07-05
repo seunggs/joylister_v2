@@ -7,7 +7,8 @@ angular
     'ngSanitize',
     'ngRoute',
     'firebase',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ngS3upload'
   ])
   .config(function ($routeProvider) {
     $routeProvider
