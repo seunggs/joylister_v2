@@ -16,12 +16,6 @@ angular.module('joylisterApp')
       update: function(userId, userDataObj) {
         return users.$child(userId).$update(userDataObj);
       },
-      findWishlist: function(userId) {
-        return users.$child(userId).$child('wishlist');
-      },
-      deleteWishlistItem: function(userId, eventId) {
-        return users.$child(userId).$child('wishlist').$remove(eventId);
-      },
       findPurchases: function(userId) {
         return users.$child(userId).$child('purchases');
       }

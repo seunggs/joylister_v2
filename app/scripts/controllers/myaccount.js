@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('joylisterApp')
-  .controller('MyaccountCtrl', function ($scope, User, Event, $routeParams) {
+  .controller('MyaccountCtrl', function ($scope, User, Event, $routeParams, Wishlist, $location) {
 		// Expose user data to scope
 		$scope.user = User.find($routeParams.userId);
 
@@ -31,13 +31,14 @@ angular.module('joylisterApp')
 		};
 
 		// Display wishlist items		
-		$scope.wishlist = User.findWishlist($routeParams.userId); // list of user's wishlist items
+		$scope.wishlist = Wishlist.find($routeParams.userId); // list of user's wishlist items
 
 		$scope.events = Event.all;
 
 		// Remove wishlist item
 		$scope.removeWishlistItem = function(wishlistItemId) {
-			User.deleteWishlistItem($routeParams.userId, wishlistItemId);
+			Wishlist.delete($routeParams.userId, wishlistItemId);
+			$location.path('/myaccount/' + $routeParams.userId);
 		};
 
 		// Display purchased items

@@ -6,7 +6,7 @@ angular.module('joylisterApp')
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 	})
-  .controller('EventViewCtrl', function ($scope, $routeParams, Event, $location, Auth, $firebase, FIREBASE_URL, $timeout, $http, Stripe, $window, TicketCodeGenerator) {
+  .controller('EventViewCtrl', function ($scope, $routeParams, Event, $location, Auth, $firebase, FIREBASE_URL, $timeout, $http, Stripe, $window, TicketCodeGenerator, Wishlist) {
 		// Initialize variables
 		$scope.formData = {};
 		$scope.soldout = false;
@@ -189,15 +189,15 @@ angular.module('joylisterApp')
 		});
 
 		// Add to wishlist
+		// First check if the user is signed in
 		$scope.addToWishlist = function() {
-			// First check if the user is signed in
 			if(Auth.signedIn() === true) {
 				// Wait for the data to load first
 				users.$on('loaded', function() {
 					// Check if this event already exists
 					if($scope.eventAlreadyExists === false) {
 						// Then add this event's eventId to wishlist in /users/userId
-						users.$child(Auth.user.data.uid).$child('wishlist').$child($routeParams.eventId).$set(true)
+						Wishlist.add(Auth.user.data.uid, $routeParams.eventId)
 							.then(function() {
 								// Success callback
 								$scope.addToWishlistSuccessMsg = true;
