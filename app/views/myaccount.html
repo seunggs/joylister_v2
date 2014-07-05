@@ -71,7 +71,7 @@
 			<a class="wishlist-item-wrapper" ng-href="#/events/{{ wishlistItemId }}">
 
 				<div class="wishlist-item-pic">
-					<div class="remove-wishlist-item" ng-click="removeWishlistItem(wishlistItemId)" tooltip="Remove from Wishlist" tooltip-placement="top"><span class="glyphicon glyphicon-remove"></span></div>
+					<div class="remove-wishlist-item" ng-click="removeWishlistItem(wishlistItemId, $event)" tooltip="Remove from Wishlist" tooltip-placement="top"><span class="glyphicon glyphicon-remove"></span></div>
 					<img ng-src="{{ events[wishlistItemId].thumbUrl }}" class="thumb">
 					<div class="price">${{ events[wishlistItemId].ticketPrice }}</div>
 				</div>

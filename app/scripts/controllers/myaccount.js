@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('joylisterApp')
-  .controller('MyaccountCtrl', function ($scope, User, Event, $routeParams, Wishlist, $location) {
+  .controller('MyaccountCtrl', function ($scope, User, Event, $routeParams, Wishlist) {
 		// Expose user data to scope
 		$scope.user = User.find($routeParams.userId);
 
@@ -36,9 +36,10 @@ angular.module('joylisterApp')
 		$scope.events = Event.all;
 
 		// Remove wishlist item
-		$scope.removeWishlistItem = function(wishlistItemId) {
+		$scope.removeWishlistItem = function(wishlistItemId, e) {
 			Wishlist.delete($routeParams.userId, wishlistItemId);
-			$location.path('/myaccount/' + $routeParams.userId);
+			e.preventDefault(); // prevent ng-href from executing
+			
 		};
 
 		// Display purchased items
