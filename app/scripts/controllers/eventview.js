@@ -6,7 +6,10 @@ angular.module('joylisterApp')
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 	})
-  .controller('EventViewCtrl', function ($scope, $routeParams, Event, $location, Auth, $firebase, FIREBASE_URL, $timeout, $http, Stripe, $window, TicketCodeGenerator, Wishlist) {
+  .controller('EventViewCtrl',
+		['$scope', '$routeParams', 'Event', '$location', 'Auth', '$firebase', 'FIREBASE_URL', '$timeout', '$http', 'Stripe', '$window', 'TicketCodeGenerator', 'Wishlist',
+		function ($scope, $routeParams, Event, $location, Auth, $firebase, FIREBASE_URL, $timeout, $http, Stripe, $window, TicketCodeGenerator, Wishlist) {
+
 		// Initialize variables
 		$scope.formData = {};
 		$scope.soldout = false;
@@ -224,4 +227,4 @@ angular.module('joylisterApp')
 			}
 		};
 
-  });
+  }]);

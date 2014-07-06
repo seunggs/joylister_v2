@@ -2,9 +2,11 @@
 'use strict';
 
 angular.module('joylisterApp')
-	.factory('Event', function($firebase, FIREBASE_URL) {
-		var eventsRef = new Firebase(FIREBASE_URL + 'events');
+	.factory('Event',
+		['$firebase', 'FIREBASE_URL',
+		function($firebase, FIREBASE_URL) {
 
+		var eventsRef = new Firebase(FIREBASE_URL + 'events');
 		var events = $firebase(eventsRef);
 
 		// Initialize variables
@@ -25,4 +27,5 @@ angular.module('joylisterApp')
 		};
 
 		return Event;
-	});
+			
+	}]);

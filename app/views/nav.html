@@ -1,16 +1,21 @@
 <div class="header" ng-controller="NavCtrl">
-	<ul class="nav nav-plain-light pull-right">
+
+  <ul class="nav nav-plain-light pull-right">
     <!-- Decide whether to show sign-in or user's name on nav bar -->
     <li ng-if="user.data"><a class="my-account" ng-href="#/myaccount/{{ user.data.uid }}" ng-click="setCurrent(null)">My Account</a></li>
-    <li ng-if="user.data"><div class="v-divider">&nbsp;</div></li>    
     <li ng-if="user.data"><a class="logout" ng-click="logout()">Log Out</a></li>
     <li ng-if="!user.data"><a class="round-btn btn-default btn-sm nav-register-btn" ng-href="#/signup">Register</a></li>
-    <li ng-if="!user.data"><div class="v-divider">&nbsp;</div></li>
     <li ng-if="!user.data"><a class="round-btn btn-default btn-sm nav-signin-btn" ng-href="#/signin">Sign In</a></li>
-    <!--<li ng-if="!userSignedIn && !cookiesExist"><a class="round-btn btn-default btn-sm nav-signup-btn" ng-href="#/signup">Sign Up</a></li>-->
   </ul>
-  <ul class="nav nav-plain-home pull-right" ng-repeat="navItem in navItems">
-    <li><a ng-class="{active: current === navItem}" ng-href="#/{{ navItemLinks[$index] }}" ng-click="setCurrent(navItem)">{{ navItemTexts[$index] }}</a></li>
-  </ul>
-  <h3><a ng-href="#/home" class="logo">Joylister</a></h3>
+
+  <!-- logo -->
+  <h3 class="hidden-xs"><a ng-href="#/home" class="logo">Joylister</a></h3>
+  
+  <!-- nav menu items -->
+  <div class="nav-items">
+    <ul class="nav nav-plain-home pull-right">
+      <li ng-repeat="navItem in navItems"><a ng-class="{active: current === navItem}" ng-href="#/{{ navItemLinks[$index] }}" ng-click="setCurrent(navItem)">{{ navItemTexts[$index] }}</a></li>
+    </ul>
+  </div>
+    
 </div> 

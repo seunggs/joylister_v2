@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('joylisterApp')
-  .controller('LoginboxCtrl', function ($scope, $timeout, $location, Auth) {
+  .controller('LoginboxCtrl',
+		['$scope', '$timeout', '$location', 'Auth',
+		function ($scope, $timeout, $location, Auth) {
+
 		// Log the user in
 		$scope.loginUser = function() {
 			Auth.login($scope.existingUser)
@@ -20,4 +23,5 @@ angular.module('joylisterApp')
 					$scope.loginErrorMsg = true; // shows login error msg when true
 				});
 		};
-  });
+
+	}]);

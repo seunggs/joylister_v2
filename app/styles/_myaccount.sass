@@ -1,7 +1,8 @@
 .myaccount
+	margin-top: 10px
 
 .myprofile
-	margin: 25px 0
+	margin: 40px 0 25px 0
 	.edit
 		display: inline-block
 		margin-left: 10px
@@ -10,7 +11,7 @@
 		text-decoration: underline
 		cursor: pointer
 		&:hover, &:active
-			color: #999	
+			color: #999
 	table
 		td
 			padding: 15px 30px 15px 0
@@ -22,13 +23,11 @@
 		width: 150px
 		height: 150px
 		margin: 0 auto
-		vertical-align: middle
 		img
 			+border-radius(250px)
 			width: 100%
 			height: 100%
 	.myinfo
-		vertical-align: middle
 		.name
 			margin: 5px 0
 		.email
@@ -65,14 +64,19 @@
 				@extend .form-edit
 				width: 62%
 
+@media(max-width:767px)
+	.myinfo
+		text-align: center
+
+.wishlist-wrapper
+	padding: 0px 15px
 .wishlist
 	margin-bottom: 20px
 	.heading
 		border-top: 1px solid $outline-color
 		padding: 25px 0 15px 15px
-		.glyphicon
+		.fa
 			display: inline-block
-			font-size: 1.5em
 			color: $joy-color
 			padding-right: 7px
 		h3
@@ -102,6 +106,8 @@
 			padding-top: 4px
 			color: #000
 			cursor: pointer
+			.fa
+				font-size: 1.2em
 		.thumb
 			width: 100%
 		.price
@@ -140,14 +146,15 @@
 				&:first-child
 					width: 50px
 
+.attended-events-wrapper
+	padding: 0 15px
 .attended-events
 	margin-bottom: 20px
 	.heading
 		border-top: 1px solid $outline-color
 		padding: 25px 0 15px 15px
-		.glyphicon
+		.fa
 			display: inline-block
-			font-size: 1.5em
 			color: #999
 			padding-right: 7px
 		h3
@@ -155,3 +162,4 @@
 			margin: 5px 0 15px 0
 			font-size: 2em
 			color: #999
+

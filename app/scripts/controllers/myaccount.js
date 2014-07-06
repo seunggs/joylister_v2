@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('joylisterApp')
-  .controller('MyaccountCtrl', function ($scope, User, Event, $routeParams, Wishlist) {
+  .controller('MyaccountCtrl',
+		['$scope', 'User', 'Event', '$routeParams', 'Wishlist',
+		function ($scope, User, Event, $routeParams, Wishlist) {
+		
 		// Expose user data to scope
 		$scope.user = User.find($routeParams.userId);
 
@@ -43,6 +46,5 @@ angular.module('joylisterApp')
 
 		// Display purchased items
 		$scope.purchases = User.findPurchases($routeParams.userId); // list of user's purchases
-		
-		
-  });
+				
+	}]);

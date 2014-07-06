@@ -3,7 +3,7 @@
 		<div class="col-md-1">
 			<!-- empty margin on the left -->
 		</div>
-		<div class="col-md-7">
+		<div class="col-md-6 signup-section">
 			<h3>Sign up for Joylister</h3>
 			<form name="signupForm" class="signup-form" ng-submit="signupSubmitted = true; confirmPassword(); registerUser(); createCookies();" novalidate>
 				<div class="form-group">
@@ -20,8 +20,9 @@
 			<alert type="danger" ng-if="registerErrorMsg" class="register-msg">Registration failed. Please contact help@joylister.com if you continue to have problems.</alert>
 			<alert type="danger" ng-if="!confirmPassword" class="register-msg">Confirm password is incorrect. Please check your password!</alert>
 			<alert type="danger" ng-if=""></alert>
+			<div>&nbsp;</div>
 		</div>
-		<div class="col-md-3 signin-sm">
+		<div class="col-md-4 signin-section">
 			<h4>Already a user?<br>Login here.</h4>
 			<div ng-include="'views/loginbox.html'"></div>
 		</div>

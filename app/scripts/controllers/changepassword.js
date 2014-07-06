@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('joylisterApp')
-  .controller('ChangepasswordCtrl', function ($scope, Auth, $timeout, $location) {
+  .controller('ChangepasswordCtrl',
+		['$scope', 'Auth', '$timeout', '$location',
+		function ($scope, Auth, $timeout, $location) {
+		
 		// Initialize variables
 		$scope.passwordChange = {
 			successMsg: false,
@@ -29,4 +32,5 @@ angular.module('joylisterApp')
 					$scope.passwordChange.loadingMsg = true;
 				});
 		};
-  });
+		
+  }]);

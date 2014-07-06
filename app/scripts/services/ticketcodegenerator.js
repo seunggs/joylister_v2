@@ -2,6 +2,7 @@
 
 angular.module('joylisterApp')
   .factory('TicketCodeGenerator', function () {
+    
     // Random number geneator
     var randomNumGenerator = function(numLength) {
       var randomNum = [];
@@ -30,4 +31,5 @@ angular.module('joylisterApp')
     };
 
     return TicketCodeGenerator;
+
   });

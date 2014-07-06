@@ -6,11 +6,18 @@ $feature-height: 100vh
 	+background(image-url("home_bg_2.png"))
 	+background-size(cover)
 	height: $feature-height
-	margin-top: -53px
-	margin-bottom: -13px
+	margin-top: 10px
 
 .feature-text
 	margin-top: 50%
+	.logo
+		font-size: 1.2em
+		font-weight: 600
+		letter-spacing: -1px
+		color: $joy-color
+		margin: 10px 0 10px 0
+		&:hover
+			text-decoration: none
 	h3
 		font-size: 2em
 		line-height: 1.2em
@@ -45,7 +52,12 @@ $feature-height: 100vh
 		background-position: bottom
 		background-repeat: no-repeat
 	.feature-text
-		margin-top: 120px
+		margin-top: 45px
 		text-align: center
 		hr
 			margin: 15px auto
+		p
+			color: #333
+		.btn-default
+			color: #333
+			border-color: #333

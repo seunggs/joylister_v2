@@ -1,32 +1,34 @@
 /* Custom page header */
 .header 
-  height: 39px
-  margin: 0
+  height: 50px
+  margin: -10px
+  padding: 0
   border-bottom: 1px solid rgba(0, 0, 0, .1)
   h3
     margin-top: 0
+    margin-left: 10px
     .logo
+      float: left
       font-weight: 600
       letter-spacing: -1px
       color: $joy-color
       padding-left: 15px
-      margin-top: 0
-      margin-bottom: 0
+      margin: 10px 0 0 0
       &:hover
         text-decoration: none
 
 /* Custom nav elements */
 .nav 
-  margin-top: -5px
   padding-right: 10px
   &.nav-plain-light
     li 
+      margin-top: 10px
       font-size: 0.9em
       float: left
       .nav-register-btn
         color: #00b6eb
         padding: 4px 10px
-        margin: 3px 0 0 15px
+        margin: 0 0 0 10px
         border-color: #00b6eb
         &.btn-default:hover,
         &.btn-default:focus,
@@ -44,19 +46,16 @@
         &.btn-default:active
           color: #aaa
           border-color: #aaa
-      .v-divider
-        height: 100%
-        border-right: 1px solid $outline-color
-        padding: 4px 0 4px 10px
-        margin: 5px 0 0 0
       .my-account
         color: #00b6eb
         padding-right: 0
+        margin-top: -4px
         &:hover, &:focus, &:active
           color: #008ebc        
       .logout
         color: #00b6eb
         padding-left: 13px
+        margin-top: -4px
         &:hover, &:focus, &:active
           color: #008ebc        
       > a
@@ -71,10 +70,27 @@
   &.nav-plain-home
     @extend .nav-plain-light
     li
+      margin-top: 6px
       > a
         color: #bbb
         &:focus, &:hover 
           color: #999
+
+@media(max-width:767px)
+  .header
+    margin-top: 0
+  .nav-items
+    margin: 0
+    margin-left: 5px
+    width: 100%
+    height: 50px
+    background-color: #fff
+    border-bottom: 1px solid $outline-color
+    .nav
+      float: left !important
+      margin-top: 0
+      padding-left: 10px
+      
 
 /* Add custom button style */
 .round-btn

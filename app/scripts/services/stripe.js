@@ -2,7 +2,10 @@
 'use strict';
 
 angular.module('joylisterApp')
-  .factory('Stripe', function ($q, $http) {
+  .factory('Stripe',
+    ['$q', '$http',
+    function ($q, $http) {
+    
     var CHARGE_ENDPOINT = 'http://localhost:8000';
     var STRIPE_API = 'pk_test_iTfgLvUHP4hUc9IDg9QAlD5o';
     var ON_HST = 0.13;
@@ -36,4 +39,4 @@ angular.module('joylisterApp')
       }
     };
 
-  });
+  }]);

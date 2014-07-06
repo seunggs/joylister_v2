@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('joylisterApp')
-	.controller('AddeventCtrl', function ($scope, Event, $timeout, $window, $firebase, FIREBASE_URL) {
+	.controller('AddeventCtrl',
+		['$scope', 'Event', '$timeout', '$window', '$firebase', 'FIREBASE_URL',
+		function ($scope, Event, $timeout, $window, $firebase, FIREBASE_URL) {
+		
 		// Initialize 
 		$scope.events = [];
 		$scope.addEventSuccess = false; // when it's true, it shows a success alert msg
@@ -99,4 +102,4 @@ angular.module('joylisterApp')
 				});
 		};
 
-	});
+	}]);

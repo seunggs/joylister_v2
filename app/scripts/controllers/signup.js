@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('joylisterApp')
-  .controller('SignupCtrl', function ($scope, Auth, Cookies, User, $location, $timeout) {
+  .controller('SignupCtrl',
+		['$scope', 'Auth', 'Cookies', 'User', '$location', '$timeout',
+		function ($scope, Auth, Cookies, User, $location, $timeout) {
 
 		// Initialize variables
 		$scope.user = {};
@@ -57,4 +59,4 @@ angular.module('joylisterApp')
 			}
 		};
 
-  });
+	}]);

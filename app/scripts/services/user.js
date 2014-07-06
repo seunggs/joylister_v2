@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('joylisterApp')
-  .factory('User', function ($firebase, FIREBASE_URL, Auth) {
+  .factory('User',
+    ['$firebase', 'FIREBASE_URL', 'Auth',
+    function ($firebase, FIREBASE_URL, Auth) {
+  
     var usersRef = new Firebase(FIREBASE_URL + 'users');
     var users = $firebase(usersRef);
 
@@ -22,4 +25,5 @@ angular.module('joylisterApp')
     };
 
     return User;
-  });
+
+  }]);

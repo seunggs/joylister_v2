@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('joylisterApp')
-  .factory('Auth', function (FIREBASE_URL, $firebaseSimpleLogin, $rootScope) {
+  .factory('Auth',
+    ['FIREBASE_URL', '$firebaseSimpleLogin', '$rootScope',
+    function (FIREBASE_URL, $firebaseSimpleLogin, $rootScope) {
 
     var rootRef = new Firebase(FIREBASE_URL);
     var loginObj = $firebaseSimpleLogin(rootRef);
@@ -49,4 +51,5 @@ angular.module('joylisterApp')
     });
 
     return Auth;
-  });
+
+  }]);
