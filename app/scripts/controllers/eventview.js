@@ -7,8 +7,8 @@ angular.module('joylisterApp')
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 	})
   .controller('EventViewCtrl',
-		['$scope', '$routeParams', 'Event', '$location', 'Auth', '$firebase', 'FIREBASE_URL', '$timeout', '$http', 'Stripe', '$window', 'TicketCodeGenerator', 'Wishlist',
-		function ($scope, $routeParams, Event, $location, Auth, $firebase, FIREBASE_URL, $timeout, $http, Stripe, $window, TicketCodeGenerator, Wishlist) {
+		['$scope', '$rootScope', '$routeParams', 'Event', '$location', 'Auth', '$firebase', 'FIREBASE_URL', '$timeout', '$http', 'Stripe', '$window', 'TicketCodeGenerator', 'Wishlist',
+		function ($scope, $rootScope, $routeParams, Event, $location, Auth, $firebase, FIREBASE_URL, $timeout, $http, Stripe, $window, TicketCodeGenerator, Wishlist) {
 
 		// Initialize variables
 		$scope.formData = {};
@@ -103,68 +103,73 @@ angular.module('joylisterApp')
 			$scope.formData.name = $scope.event.name;
 			$scope.formData.ticketPrice = $scope.event.ticketPrice;
 
-			Stripe.buyTickets($scope.formData)
-				.then(function() {
-					// Increment currentQuantity by the purchase quantity
-					var currentQuantityRef = new Firebase(FIREBASE_URL + 'events/' + $routeParams.eventId + '/dates/' + $scope.formData.date + '/currentQuantity');
-					var currentQuantity = $firebase(currentQuantityRef);
+			if(!Auth.signedIn()) {
+				$location.path('/signup');
+			} else {
+				Stripe.buyTickets($scope.formData)
+					.then(function() {
+						// Increment currentQuantity by the purchase quantity
+						var currentQuantityRef = new Firebase(FIREBASE_URL + 'events/' + $routeParams.eventId + '/dates/' + $scope.formData.date + '/currentQuantity');
+						var currentQuantity = $firebase(currentQuantityRef);
 
-					// grab currentQty value from Firebase again to get the existing value
-					$scope.currentQty = $scope.event.dates[$scope.formData.date].currentQuantity;
+						// grab currentQty value from Firebase again to get the existing value
+						$scope.currentQty = $scope.event.dates[$scope.formData.date].currentQuantity;
 
-					currentQuantity.$transaction(function() {
-						if($scope.currentQty + $scope.formData.buyQuantity > $scope.event.maxQuantity) {
-							$window.alert('Not enough tickets left');
-							$location.path('/events/' + $routeParams.eventId);
+						currentQuantity.$transaction(function() {
+							if($scope.currentQty + $scope.formData.buyQuantity > $scope.event.maxQuantity) {
+								$window.alert('Not enough tickets left');
+								$location.path('/events/' + $routeParams.eventId);
+							} else {
+								return $scope.currentQty + $scope.formData.buyQuantity;
+							}
+						});
+
+						// Add purchases (under users) to Firebase
+						var buyerFullname = users.$child(Auth.user.data.uid).firstname + users.$child(Auth.user.data.uid).lastname;
+						var generatedTicketCodes = TicketCodeGenerator.create($scope.currentQty, $scope.formData.buyQuantity, buyerFullname);
+
+						var datePurchasedRef = new Firebase(FIREBASE_URL + 'users/' + Auth.user.data.uid + '/purchases/' + $routeParams.eventId + '/' + $scope.formData.date);
+						var datePurchased = $firebase(datePurchasedRef);
+
+						if (datePurchased.purchaseQty === undefined) {
+							datePurchased.$update({
+								purchaseQty: $scope.formData.buyQuantity
+							});
+
+							for (var i=0; i<$scope.formData.buyQuantity; i++) {
+								datePurchased.$child('ticketCodes')[i] = generatedTicketCodes[i];
+							}
 						} else {
-							return $scope.currentQty + $scope.formData.buyQuantity;
+							datePurchased.$update({
+								purchaseQty: datePurchased.purchaseQty + $scope.formData.buyQuantity
+							});
+
+							for (var j=datePurchased.purchaseQty; j<(datePurchased.purchaseQty+$scope.formData.buyQuantity); j++) {
+								datePurchased.$child('ticketCodes').$add(generatedTicketCodes[j-datePurchased.purchaseQty]);
+							}
 						}
-					});
 
-					// Add purchases (under users) to Firebase
-					var buyerFullname = users.$child(Auth.user.data.uid).firstname + users.$child(Auth.user.data.uid).lastname;
-					var generatedTicketCodes = TicketCodeGenerator.create($scope.currentQty, $scope.formData.buyQuantity, buyerFullname);
+						// Now add purchasers (under events) to Firebase
+						var purchaserIdRef = new Firebase(FIREBASE_URL + 'events/' + $routeParams.eventId + '/dates/' + $scope.formData.date + '/purchasers/' + Auth.user.data.uid);
+						var purchaserId = $firebase(purchaserIdRef);
 
-					var datePurchasedRef = new Firebase(FIREBASE_URL + 'users/' + Auth.user.data.uid + '/purchases/' + $routeParams.eventId + '/' + $scope.formData.date);
-					var datePurchased = $firebase(datePurchasedRef);
+						if (purchaserId.purchaseQty === undefined) {
+							purchaserId.$update({purchaseQty: $scope.formData.buyQuantity});
+						} else {
+							purchaserId.$update({purchaseQty: purchaserId.purchaseQty + $scope.formData.buyQuantity});
+						}
+						
+						// Update the duplicate currentQty for the closest event date under eventId for progressbar in eventbox
+						var eventRef = new Firebase(FIREBASE_URL + 'events/' + $routeParams.eventId);
+						var eventFb = $firebase(eventRef);
 
-					if (datePurchased.purchaseQty === undefined) {
-						datePurchased.$update({
-							purchaseQty: $scope.formData.buyQuantity
+						eventFb.$update({
+							closestDateCurrentQty: eventFb.closestDateCurrentQty + $scope.formData.buyQuantity
 						});
 
-						for (var i=0; i<$scope.formData.buyQuantity; i++) {
-							datePurchased.$child('ticketCodes')[i] = generatedTicketCodes[i];
-						}
-					} else {
-						datePurchased.$update({
-							purchaseQty: datePurchased.purchaseQty + $scope.formData.buyQuantity
-						});
-
-						for (var j=datePurchased.purchaseQty; j<(datePurchased.purchaseQty+$scope.formData.buyQuantity); j++) {
-							datePurchased.$child('ticketCodes').$add(generatedTicketCodes[j-datePurchased.purchaseQty]);
-						}
-					}
-
-					// Now add purchasers (under events) to Firebase
-					var purchaserIdRef = new Firebase(FIREBASE_URL + 'events/' + $routeParams.eventId + '/dates/' + $scope.formData.date + '/purchasers/' + Auth.user.data.uid);
-					var purchaserId = $firebase(purchaserIdRef);
-
-					if (purchaserId.purchaseQty === undefined) {
-						purchaserId.$update({purchaseQty: $scope.formData.buyQuantity});
-					} else {
-						purchaserId.$update({purchaseQty: purchaserId.purchaseQty + $scope.formData.buyQuantity});
-					}
-					
-					// Update the duplicate currentQty for the closest event date under eventId for progressbar in eventbox
-					var eventRef = new Firebase(FIREBASE_URL + 'events/' + $routeParams.eventId);
-					var eventFb = $firebase(eventRef);
-
-					eventFb.$update({
-						closestDateCurrentQty: eventFb.closestDateCurrentQty + $scope.formData.buyQuantity
 					});
-
-				});
+			}
+			
 		};
 
 		// Wishlist -------------------------
@@ -175,6 +180,7 @@ angular.module('joylisterApp')
 
 		// Check if this event is already in the user's wishlist
 		var wishlistObj = {};
+
 		var checkExistingWishlist = function() {
 			wishlistObj = users.$child(Auth.user.data.uid).$child('wishlist');
 
@@ -183,7 +189,7 @@ angular.module('joylisterApp')
 			}
 		};
 
-		users.$on('loaded', function() {
+    $rootScope.$on('$firebaseSimpleLogin:login', function() {
 			checkExistingWishlist();
 		});
 

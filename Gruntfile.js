@@ -308,7 +308,7 @@ module.exports = function (grunt) {
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
             'fonts/*',
-            '../firebase.json'
+            'firebase.json'
           ]
         }, {
           expand: true,
