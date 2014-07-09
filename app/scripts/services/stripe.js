@@ -6,7 +6,7 @@ angular.module('joylisterApp')
     ['$q', '$http',
     function ($q, $http) {
     
-    var CHARGE_ENDPOINT = 'https://joylister.firebaseapp.com';
+    var CHARGE_ENDPOINT = 'http://desolate-island-6060.herokuapp.com';
     var STRIPE_API = 'pk_test_iTfgLvUHP4hUc9IDg9QAlD5o';
     var ON_HST = 0.13;
 
@@ -27,7 +27,7 @@ angular.module('joylisterApp')
         
         var handler = StripeCheckout.configure({
           key: STRIPE_API,
-          image: '/images/cc56abdc.stripe_logo.jpg',
+          image: 'https://s3.amazonaws.com/joylister-media/images/stripe_logo.jpg',
           token: handleToken,
           name: options.name,
           description: options.buyQuantity + ' ticket(s)' + ' for ' + options.date,
