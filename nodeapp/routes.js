@@ -58,10 +58,7 @@ module.exports = function(app) {
 			signature: signature,
 			key: S3_KEY
 		});
+
 	});
 
-	// application
-	app.get('*', function(req, res) {
-		res.sendfile('../app/index.html'); // have Angular handle all front-end routing
-	});
 };

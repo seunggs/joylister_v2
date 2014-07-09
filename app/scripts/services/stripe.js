@@ -27,7 +27,7 @@ angular.module('joylisterApp')
         
         var handler = StripeCheckout.configure({
           key: STRIPE_API,
-          image: '/images/stripe_logo.jpg',
+          image: '/images/cc56abdc.stripe_logo.jpg',
           token: handleToken,
           name: options.name,
           description: options.buyQuantity + ' ticket(s)' + ' for ' + options.date,
