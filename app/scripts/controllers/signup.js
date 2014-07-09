@@ -2,8 +2,8 @@
 
 angular.module('joylisterApp')
   .controller('SignupCtrl',
-		['$scope', 'Auth', 'Cookies', 'User', '$location', '$timeout',
-		function ($scope, Auth, Cookies, User, $location, $timeout) {
+		['$scope', 'Auth', 'User', '$location', '$timeout',
+		function ($scope, Auth, User, $location, $timeout) {
 
 		// Initialize variables
 		$scope.user = {};
@@ -26,7 +26,7 @@ angular.module('joylisterApp')
 			// Attempt to register user only if confirm password matches password
 			if($scope.user.password === $scope.user.confirmPassword) {
 				Auth.register($scope.user)
-					.then(function(user) {
+					.then(function() {
 						// Log the user in
 						Auth.login($scope.user)
 							.then(function() {
@@ -42,9 +42,6 @@ angular.module('joylisterApp')
 						
 						$scope.registerSuccessMsg = true; // shows register success msg when true
 						$scope.registerErrorMsg = false;
-
-						// Create cookies and set the userId to user's uid
-						Cookies.create(user.uid);
 
 						// send the user back to root after the delay
 						$timeout(function() {

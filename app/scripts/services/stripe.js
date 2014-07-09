@@ -6,7 +6,7 @@ angular.module('joylisterApp')
     ['$q', '$http',
     function ($q, $http) {
     
-    var CHARGE_ENDPOINT = 'http://localhost:8000';
+    var CHARGE_ENDPOINT = 'https://joylister.firebaseapp.com';
     var STRIPE_API = 'pk_test_iTfgLvUHP4hUc9IDg9QAlD5o';
     var ON_HST = 0.13;
 

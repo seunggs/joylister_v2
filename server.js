@@ -4,7 +4,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
-var port = process.env.port || 8000;
+var port = process.env.PORT || 8000;
 
 // configure app
 app.use(express.static(__dirname + '/app'));
