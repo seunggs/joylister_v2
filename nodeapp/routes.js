@@ -3,9 +3,10 @@
 
 var stripe = require('stripe')('sk_test_BiXbus56OIaKgkp3B7ftheQp'); // update it with real one on production
 var crypto = require('crypto'); // for AWS S3
-var config = require('../config.js'); // for AWS S3 credentials
 var moment = require('moment');
 var AWS_BUCKET = 'joylister-media';
+var S3_KEY = process.env.S3_KEY;
+var S3_SECRET = process.env.S3_SECRET;
 
 module.exports = function(app) {
 	// stripe charge
@@ -31,8 +32,6 @@ module.exports = function(app) {
 
 	});
 
-	//2014-12-01T12:00:00.000Z
-
 	// AWS S3 credentials
 	app.get('/s3credentials', function(req, res) {
 		var s3Policy = {
@@ -48,18 +47,16 @@ module.exports = function(app) {
 		// stringify and encode the policy
 		var stringPolicy = JSON.stringify(s3Policy);
 		var base64Policy = new Buffer(stringPolicy, 'utf8').toString('base64');
-		console.log(stringPolicy);
-		console.log(base64Policy);
 
 		// sign the base64 encoded policy
-		var signature = crypto.createHmac('sha1', config.AWS_SECRET_ACCESS_KEY)
+		var signature = crypto.createHmac('sha1', S3_SECRET)
 			.update(new Buffer(base64Policy, 'utf8')).digest('base64');
 
 		// build the results object and return it
 		res.json({
 			policy: base64Policy,
 			signature: signature,
-			key: config.AWS_KEY
+			key: S3_KEY
 		});
 	});
 
