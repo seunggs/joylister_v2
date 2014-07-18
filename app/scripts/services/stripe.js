@@ -20,7 +20,7 @@ angular.module('joylisterApp')
             {
               stripeToken: token.id,
               description: options.name + ': ' + options.buyQuantity + ' ticket(s)' + ' for ' + options.date,
-              amount: options.ticketPrice * 100 * options.buyQuantity * (1+ON_HST)
+              amount: parseInt(options.ticketPrice * 100 * options.buyQuantity * (1+ON_HST))
             }
           ).then(deferred.resolve, deferred.reject);
         };

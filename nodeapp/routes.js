@@ -12,7 +12,7 @@ module.exports = function(app) {
 	// stripe charge
 	app.post('/charge', function(req, res) {
 		var stripeToken = req.body.stripeToken;
-		var amount = parseInt(req.body.amount);
+		var amount = req.body.amount;
 		var description = req.body.description;
 
 		var chargeObj = {
