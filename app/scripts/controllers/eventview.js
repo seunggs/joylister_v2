@@ -13,6 +13,7 @@ angular.module('joylisterApp')
 		// Initialize variables
 		$scope.formData = {};
 		$scope.bookIt = {
+			errorMsg: false,
 			loadingMsg: false
 		};
 		$scope.soldout = false;
@@ -110,7 +111,11 @@ angular.module('joylisterApp')
 			$scope.formData.ticketPrice = $scope.event.ticketPrice;
 
 			if(!Auth.signedIn()) {
-				$location.path('/signup');
+				$scope.bookIt.errorMsg = true;
+				$timeout(function() {
+					$location.path('/signup');
+				}, 2000);
+				
 			} else {
 				Stripe.buyTickets($scope.formData)
 					.then(function() {
