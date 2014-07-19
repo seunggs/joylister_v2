@@ -20,7 +20,7 @@ angular.module('joylisterApp')
             {
               stripeToken: token.id,
               description: options.name + ': ' + options.buyQuantity + ' ticket(s)' + ' for ' + options.date,
-              amount: parseInt(options.ticketPrice * 100 * options.buyQuantity * (1+ON_HST))
+              amount: Math.round(options.ticketPrice * 100 * options.buyQuantity * (1+ON_HST))
             }
           ).then(deferred.resolve, deferred.reject);
         };
@@ -30,8 +30,9 @@ angular.module('joylisterApp')
           image: 'https://s3.amazonaws.com/joylister-media/images/stripe_logo.jpg',
           token: handleToken,
           name: options.name,
+          currency: 'cad',
           description: options.buyQuantity + ' ticket(s)' + ' for ' + options.date,
-          amount: options.ticketPrice * 100 * options.buyQuantity * (1+ON_HST)
+          amount: Math.round(options.ticketPrice * 100 * options.buyQuantity * (1+ON_HST))
         });
 
         handler.open();

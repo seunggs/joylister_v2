@@ -50,7 +50,7 @@
 				<a class="btn btn-primary btn-lg btn-block" ng-click="openCheckout()" ng-if="!soldout">Book It Now</a>
 				<button disabled class="btn btn-danger btn-lg btn-block" ng-click="openCheckout()" ng-if="soldout">Sold Out!</button>
 				<a ng-if="!eventAlreadyExists" class="btn btn-default btn-lg btn-block" ng-click="addToWishlist()"><i class="fa fa-heart"></i> Add to Wishlist</a>
-				<a ng-if="eventAlreadyExists" class="btn btn-default btn-lg btn-block disabled"><span class="glyphicon glyphicon-heart"></span> Added to Wishlist</a>
+				<a ng-if="eventAlreadyExists" class="btn btn-default btn-lg btn-block disabled"><i class="fa fa-heart"></i> Added to Wishlist</a>
 
 				<!-- error message handling -->
 				<alert type="success" ng-if="addToWishlistSuccessMsg" class="alert-msg">Event added to Wishlist!</alert>
