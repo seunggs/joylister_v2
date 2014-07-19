@@ -12,6 +12,9 @@ angular.module('joylisterApp')
 
 		// Initialize variables
 		$scope.formData = {};
+		$scope.bookIt = {
+			loadingMsg: false
+		};
 		$scope.soldout = false;
 
 		// Get firebase ref for use throughout
@@ -99,6 +102,9 @@ angular.module('joylisterApp')
 		// Configure Stripe Checkout
 
 		$scope.openCheckout = function() {
+			// Loading image
+			$scope.bookIt.loadingMsg = true;
+
 			// Add other data required for Stripe Checkout
 			$scope.formData.name = $scope.event.name;
 			$scope.formData.ticketPrice = $scope.event.ticketPrice;
@@ -108,6 +114,9 @@ angular.module('joylisterApp')
 			} else {
 				Stripe.buyTickets($scope.formData)
 					.then(function() {
+						// Remove loading message
+						$scope.bookIt.loadingMsg = false;
+
 						// Increment currentQuantity by the purchase quantity
 						var currentQuantityRef = new Firebase(FIREBASE_URL + 'events/' + $routeParams.eventId + '/dates/' + $scope.formData.date + '/currentQuantity');
 						var currentQuantity = $firebase(currentQuantityRef);
@@ -167,6 +176,9 @@ angular.module('joylisterApp')
 							closestDateCurrentQty: eventFb.closestDateCurrentQty + $scope.formData.buyQuantity
 						});
 
+					}, function() {
+						// Remove loading message
+						$scope.bookIt.loadingMsg = false;
 					});
 			}
 			

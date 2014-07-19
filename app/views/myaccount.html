@@ -29,19 +29,8 @@
 						</form>
 					</div>
 					
-					<div class="email" ng-if="!editProfile.showEmailEdit">
+					<div class="email">
 						<div class="text">{{ user.email }}</div>
-						<div class="edit" ng-click="editProfile.showEmailEdit = true">Edit</div>
-					</div>
-					<!-- only show when edit is clicked -->
-					<div class="emailEdit" ng-if="editProfile.showEmailEdit">
-						<form ng-submit="submitEmailEdit()">
-							<div class="form-group">
-								<input class="form-control form-edit-email" type="email" placeholder="Email" ng-model="editProfile.email" required>
-								<button type="submit" class="btn btn-warning btn-edit">Submit</button>
-								<button class="btn btn-danger btn-edit" ng-click="editProfile.showEmailEdit = false">Cancel</button>
-							</div>
-						</form>
 					</div>
 
 					<div>

@@ -6,13 +6,20 @@ angular.module('joylisterApp')
 		function ($scope, Auth, $timeout, $location) {
 		
 		// Initialize variables
+		$scope.fromForgotPassword = false;
 		$scope.passwordChange = {
 			successMsg: false,
 			errorMsg: false,
 			loadingMsg: false
 		};
 
+		// Get parameter from URL
+		if(($location.search()).forgotPassword) {
+			$scope.fromForgotPassword = true;
+		}
+
 		$scope.changePassword = function() {
+			$scope.passwordChange.loadingMsg = true;
 			Auth.changePassword($scope.user)
 				.then(function() {
 					$scope.passwordChange.loadingMsg = false;
@@ -23,13 +30,12 @@ angular.module('joylisterApp')
 						$location.path('/');
 					}, 1500);
 				}, function() {
+					$scope.passwordChange.loadingMsg = false;
 					$scope.passwordChange.errorMsg = true;
 
 					$timeout(function() {
 						$scope.passwordChange.errorMsg = false;
 					}, 1500);
-				}, function() {
-					$scope.passwordChange.loadingMsg = true;
 				});
 		};
 		

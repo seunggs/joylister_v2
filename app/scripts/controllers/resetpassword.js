@@ -13,6 +13,7 @@ angular.module('joylisterApp')
 		};
 
     $scope.sendPasswordResetEmail = function() {
+			$scope.passwordReset.sendingMsg = true;
 			Auth.sendPasswordResetEmail($scope.user)
 				.then(function() {
 					$scope.passwordReset.sendingMsg = false;
@@ -23,13 +24,8 @@ angular.module('joylisterApp')
 						$location.path('/');
 					}, 1500);
 				}, function() {
+					$scope.passwordReset.sendingMsg = false;
 					$scope.passwordReset.errorMsg = true;
-
-					$timeout(function() {
-						$scope.passwordReset.errorMsg = false;
-					}, 1500);
-				}, function() {
-					$scope.passwordReset.sendingMsg = true;
 				});
     };
 

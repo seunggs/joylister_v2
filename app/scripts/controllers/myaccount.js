@@ -11,20 +11,12 @@ angular.module('joylisterApp')
 		// Edit profile - must create an object due to prototypal inheritance
 		$scope.editProfile = {
 			showNameEdit: false,
-			showEmailEdit: false
 		};
 
 		$scope.submitNameEdit = function() {
 			User.update($routeParams.userId, { firstname: $scope.editProfile.firstName, lastname: $scope.editProfile.lastName })
 				.then(function() {
 					$scope.editProfile.showNameEdit = false;
-				});
-		};
-
-		$scope.submitEmailEdit = function() {
-			User.update($routeParams.userId, { email: $scope.editProfile.email })
-				.then(function() {
-					$scope.editProfile.showEmailEdit = false;
 				});
 		};
 

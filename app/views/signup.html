@@ -11,15 +11,15 @@
 					<input type="text" name="userLastName" class="form-control" placeholder="Last name" ng-model="userData.lastname" required><div ng-if="signupSubmitted && signupForm.userLastName.$error.required" class="error-msg">Last name is required!</div><br>
 					<input type="email" name="userEmail" class="form-control" placeholder="Email" ng-model="user.email" required><div ng-if="signupSubmitted && signupForm.userEmail.$error.required" class="error-msg">Email is required!</div><div ng-if="signupSubmitted && signupForm.userEmail.$error.email" class="error-msg">Please enter a valid email address!</div><br>
 					<input type="password" name="userPassword" class="form-control" placeholder="Password" ng-model="user.password" required><div ng-if="signupSubmitted && signupForm.userPassword.$error.required" class="error-msg">Password is required!</div><br>
-					<input type="password" name="confirmPassword" class="form-control" placeholder="Confirm password" ng-model="user.confirmPassword" required><div ng-if="signupSubmitted && signupForm.confirmPassword.$error.required" class="error-msg">Password confirm is required!</div><br>
+					<input type="password" name="passwordConfirm" class="form-control" placeholder="Confirm password" ng-model="user.passwordConfirm" required><div ng-if="signupSubmitted && signupForm.passwordConfirm.$error.required" class="error-msg">Password confirm is required!</div><br>
 					<input type="submit" value="Sign Me Up!" class="btn btn-primary btn-lg signup-btn">
 				</div>
 			</form>
 			<!-- success & error message handling -->
+			<alert type="warning" ng-if="register.loadingMsg" class="register-msg"><i class="fa fa-spinner fa-spin"></i>&nbsp;Loading...</alert>
 			<alert type="success" ng-if="registerSuccessMsg" class="register-msg">You're signed up to Joylister! :D</alert>
 			<alert type="danger" ng-if="registerErrorMsg" class="register-msg">Registration failed. Please contact help@joylister.com if you continue to have problems.</alert>
-			<alert type="danger" ng-if="!confirmPassword" class="register-msg">Confirm password is incorrect. Please check your password!</alert>
-			<alert type="danger" ng-if=""></alert>
+			<alert type="danger" ng-if="!passwordConfirm" class="register-msg">Confirm password is incorrect. Please check your password!</alert>
 			<div>&nbsp;</div>
 		</div>
 		<div class="col-md-4 signin-section">

@@ -47,7 +47,7 @@
 						</table>
 					</div>
 				</form>
-				<a class="btn btn-primary btn-lg btn-block" ng-click="openCheckout()" ng-if="!soldout">Book It Now</a>
+				<a class="btn btn-primary btn-lg btn-block" ng-click="openCheckout()" ng-if="!soldout"><i class="fa fa-spinner fa-spin" ng-if="bookIt.loadingMsg"></i>&nbsp;Book It Now</a>
 				<button disabled class="btn btn-danger btn-lg btn-block" ng-click="openCheckout()" ng-if="soldout">Sold Out!</button>
 				<a ng-if="!eventAlreadyExists" class="btn btn-default btn-lg btn-block" ng-click="addToWishlist()"><i class="fa fa-heart"></i> Add to Wishlist</a>
 				<a ng-if="eventAlreadyExists" class="btn btn-default btn-lg btn-block disabled"><i class="fa fa-heart"></i> Added to Wishlist</a>

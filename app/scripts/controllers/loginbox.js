@@ -5,13 +5,20 @@ angular.module('joylisterApp')
 		['$scope', '$timeout', '$location', 'Auth',
 		function ($scope, $timeout, $location, Auth) {
 
+		// initialize variables
+		$scope.loginbox = {
+			loginErrorMsg: false,
+			loginSuccessMsg: false,
+			loginLoadingMsg: false
+		};
+		
 		// Log the user in
 		$scope.loginUser = function() {
+			$scope.loginbox.loginLoadingMsg = true;
 			Auth.login($scope.existingUser)
 				.then(function(user) {
-					// success callback
-					$scope.loginSuccessMsg = true; // shows login success msg when true
-					$scope.loginErrorMsg = false;
+					$scope.loginbox.loginLoadingMsg = false;
+					$scope.loginbox.loginSuccessMsg = true; // shows login success msg when true
 
 					// send the user to myaccount page after the delay
 					$timeout(function() {
@@ -19,8 +26,8 @@ angular.module('joylisterApp')
 					}, 1500); // delays relocation until msg is shown
 
 				}, function() {
-					// error callback
-					$scope.loginErrorMsg = true; // shows login error msg when true
+					$scope.loginbox.loginLoadingMsg = false;
+					$scope.loginbox.loginErrorMsg = true; // shows login error msg when true
 				});
 		};
 
